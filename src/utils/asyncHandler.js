@@ -10,7 +10,6 @@ export {asyncHandler}
 
 
 
-
 //using async and await 
 
 // const asyncHandler = (fn)=>async (req,res,next)=>{

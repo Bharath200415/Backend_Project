@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
         },
         watchHistory:[
             {
-                type:Schema.Types.ObjectId,
+                type:mongoose.Schema.Types.ObjectId,
                 ref:"Video"
             }
         ],
@@ -54,15 +54,15 @@ dotenv.config({
     path:'../.env'
 })
 
-userSchema.pre("save", async function(next){
+userSchema.pre("save", async function(){
     
     //we'll hash only if the password gets changed wont run at each run
     if (!this.isModified("password")){
-        return next();
+        return;
     }
     
     this.password=await bcrypt.hash(this.password,10);
-    next();
+    
 
 })
  

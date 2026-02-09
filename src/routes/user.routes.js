@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/user.controller.js";
+import { loginUser, logoutUser, registerUser } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { app } from "../app.js";
 
@@ -14,13 +14,15 @@ userRouter.route("/register").post(
             name:"coverImage",
             maxCount:1
         },{
-            
+
         }
 
     ]), //middleware
-    registerUser)
+registerUser)
 
+userRouter.route("/login").post(loginUser)
 
+userRouter.route("/logout").post(logoutUser)
 
 
 export default userRouter;

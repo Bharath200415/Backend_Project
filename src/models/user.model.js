@@ -54,15 +54,15 @@ dotenv.config({
     path:'../.env'
 })
 
-userSchema.pre("save", async function(){
+userSchema.pre("save", async function(next){
     
     //we'll hash only if the password gets changed wont run at each run
     if (!this.isModified("password")){
-        return;
+        return next();
     }
     
-    this.password=await bcrypt.hash(this.password,10);
-    
+    this.password=await bcrypt.hash(this.password,10); //10 salt rounds
+    next()  
 
 })
  
